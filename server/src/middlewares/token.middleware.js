@@ -27,6 +27,6 @@ const auth = async( req, res, next) => {
     const user = await userModel.findById(tokenDecoded.data);
     if (!user) return responseHandler.unauthorize(res); 
     req.user = user; 
-    next()
+    next();
 }
 export default {auth, tokenDecode}
