@@ -4,6 +4,7 @@ import cors from "cors"
 import http from "http"
 import mongoose from "mongoose"
 import "dotenv/config"
+import routes from "./src/routes/index.js"
 //initiate middleware
 const app = express() 
 //handle cors
@@ -14,6 +15,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 //for parsing cookies from the http messages
 app.use(cookieParser())
+//use all configured routes
+app.use("/api/v1", routes);
+
 //initialising server and binding requests to express app for service
 const server = http.createServer(app)
 const port = process.env.PORT || 5000
