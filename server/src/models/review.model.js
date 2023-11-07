@@ -31,4 +31,4 @@ export default mongoose.model(
             required: true
         },
     },modelOptions)
-);
+);  
