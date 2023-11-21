@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+
+  backend:
+    image: your-backend-image:latest
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    environment:
+      MONGODB_URI: "mongodb+srv://dhruv:citl@cluster0.xdudzzp.mongodb.net/?retryWrites=true&w=majority"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://database:27017"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  database:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dhruv
+      MONGO_INITDB_ROOT_PASSWORD: citl
+    ports:
+      - "27017:27017"
